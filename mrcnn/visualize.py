@@ -12,6 +12,7 @@ import sys
 import random
 import itertools
 import colorsys
+import datetime
 
 import numpy as np
 from skimage.measure import find_contours
@@ -19,6 +20,8 @@ import matplotlib.pyplot as plt
 from matplotlib import patches,  lines
 from matplotlib.patches import Polygon
 import IPython.display
+
+now = datetime.datetime.now()
 
 # Root directory of the project
 ROOT_DIR = os.path.abspath("../")
@@ -162,9 +165,9 @@ def display_instances(image, boxes, masks, class_ids, class_names,
             verts = np.fliplr(verts) - 1
             p = Polygon(verts, facecolor="none", edgecolor=color)
             ax.add_patch(p)
-    return(masked_image.astype(np.uint8))
-#     if auto_show:
-#         plt.show()
+    ax.imsave("{0:%Y-%m-%d %H:%M:%S}.jpg".format(now)', masked_image.astype(np.uint8))
+    if auto_show:
+        plt.show()
 
 
 def display_differences(image,
