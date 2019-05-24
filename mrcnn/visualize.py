@@ -165,7 +165,8 @@ def display_instances(image, boxes, masks, class_ids, class_names,
             verts = np.fliplr(verts) - 1
             p = Polygon(verts, facecolor="none", edgecolor=color)
             ax.add_patch(p)
-    ax.imsave("{0:%Y-%m-%d %H:%M:%S}.jpg".format(now), masked_image.astype(np.uint8))
+    ax.imshow(masked_image.astype(np.uint8))
+    plt.savefig("{0:%Y-%m-%d %H:%M:%S}.jpg".format(now))
     if auto_show:
         plt.show()
 
