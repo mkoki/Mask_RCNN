@@ -1,3 +1,23 @@
+Skip to content
+ 
+Search or jump to…
+
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@mkoki 
+23
+536
+12,711 5,634 matterport/Mask_RCNN
+ Code  Issues 920  Pull requests 53  Projects 0  Wiki  Security  Insights
+Mask_RCNN/mrcnn/visualize.py
+@yanfengliu yanfengliu remove unused code (#1227)
+fb76624 on 4 Feb
+@waleedka @Borda @yanfengliu @coreywho
+501 lines (438 sloc)  18.5 KB
+    
 """
 Mask R-CNN
 Display and Visualization Functions.
@@ -135,23 +155,20 @@ def display_instances(image, boxes, masks, class_ids, class_names,
             ax.add_patch(p)
 
         # Label
-#         if not captions:
-#             class_id = class_ids[i]
-#             score = scores[i] if scores is not None else None
-#             label = class_names[class_id]
-#             caption = "{} {:.3f}".format(label, score) if score else label
-#         else:
-#             caption = captions[i]
-#         ax.text(x1, y1 + 8, caption,
-#                 color='w', size=11, backgroundcolor="none")
+        if not captions:
+            class_id = class_ids[i]
+            score = scores[i] if scores is not None else None
+            label = class_names[class_id]
+            caption = "{} {:.3f}".format(label, score) if score else label
+        else:
+            caption = captions[i]
+        ax.text(x1, y1 + 8, caption,
+                color='w', size=11, backgroundcolor="none")
 
-        if class_ids[i] == 39:
-           print("in-39")
-           
         # Mask
         mask = masks[:, :, i]
-#         if show_mask:
-#             masked_image = apply_mask(masked_image, mask, color)
+        if show_mask:
+            masked_image = apply_mask(masked_image, mask, color)
 
         # Mask Polygon
         # Pad to ensure proper polygons for masks that touch image edges.
@@ -164,10 +181,10 @@ def display_instances(image, boxes, masks, class_ids, class_names,
             verts = np.fliplr(verts) - 1
             p = Polygon(verts, facecolor="none", edgecolor=color)
             ax.add_patch(p)
-#     ax.imshow(masked_image.astype(np.uint8))
-#     if auto_show:
-#         plt.show()
-    return verts
+    ax.imshow(masked_image.astype(np.uint8))
+    if auto_show:
+        plt.show()
+
 
 def display_differences(image,
                         gt_box, gt_class_id, gt_mask,
