@@ -7,7 +7,7 @@ speed = 30
 
 #movie_nameにGoogle Driveの動画名を入れる
 movie_name = 'fede.MOV'
-!cp "./gdrive/My Drive/fede.MOV" "./"
+cp "./gdrive/My Drive/fede.MOV" "./"
 
 import cv2
 
